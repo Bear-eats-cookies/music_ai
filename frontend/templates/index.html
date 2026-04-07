@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI音乐生成系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 AI音乐生成系统</h1>
+            <p class="subtitle">上传您的声音，生成专属歌曲</p>
+        </header>
+
+        <main>
+            <!-- 步骤1: 上传音频 -->
+            <section class="step" id="step1">
+                <h2>步骤 1: 上传音频样本</h2>
+                <p class="tip">上传30秒说话或1-2分钟清唱音频（支持WAV/MP3）</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="audioFile" accept="audio/*" hidden>
+                    <div class="upload-icon">📁</div>
+                    <p>点击或拖拽上传音频文件</p>
+                </div>
+                
+                <div id="uploadStatus" class="status hidden"></div>
+                <button id="uploadBtn" class="btn btn-primary hidden">开始上传</button>
+            </section>
+
+            <!-- 步骤2: 风格推荐 -->
+            <section class="step hidden" id="step2">
+                <h2>步骤 2: 选择音乐风格</h2>
+                <p class="tip">AI为您推荐最适合的风格</p>
+                
+                <div id="recommendations" class="recommendations"></div>
+                <div class="custom-input">
+                    <label>或输入自定义风格：</label>
+                    <input type="text" id="customStyle" placeholder="例如: 流行抒情">
+                </div>
+            </section>
+
+            <!-- 步骤3: 输入歌词 -->
+            <section class="step hidden" id="step3">
+                <h2>步骤 3: 输入歌词</h2>
+                <p class="tip">输入您的歌词，或使用AI生成</p>
+
+                <div class="custom-input">
+                    <label for="rvcModelSelect">官方示例音色：</label>
+                    <select id="rvcModelSelect"></select>
+                    <p class="field-help" id="rvcModelHelp">正在加载可用示例音色...</p>
+                </div>
+                
+                <textarea id="lyrics" rows="8" placeholder="输入歌词...&#10;&#10;例如：&#10;夜空中最亮的星&#10;能否听清&#10;那仰望的人&#10;心底的孤独和叹息"></textarea>
+                
+                <button id="generateBtn" class="btn btn-primary">🎵 生成歌曲</button>
+            </section>
+
+            <!-- 步骤4: 生成进度 -->
+            <section class="step hidden" id="step4">
+                <h2>正在生成您的专属歌曲...</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+                
+                <div class="progress-steps">
+                    <div class="progress-step" id="progress1">✓ 音频预处理</div>
+                    <div class="progress-step" id="progress2">⏳ 声音克隆</div>
+                    <div class="progress-step" id="progress3">⏳ 音乐生成</div>
+                    <div class="progress-step" id="progress4">⏳ 后处理混音</div>
+                </div>
+            </section>
+
+            <!-- 步骤5: 结果展示 -->
+            <section class="step hidden" id="step5">
+                <h2>✨ 生成完成！</h2>
+                
+                <div class="result-card">
+                    <h3>您的专属歌曲</h3>
+                    <audio id="resultAudio" controls></audio>
+                    
+                    <div class="result-info">
+                        <p><strong>风格：</strong><span id="resultStyle"></span></p>
+                        <p><strong>音色：</strong><span id="resultVoiceModel"></span></p>
+                        <p><strong>时长：</strong><span id="resultDuration"></span></p>
+                    </div>
+                    
+                    <div class="result-actions">
+                        <button id="downloadBtn" class="btn btn-primary">📥 下载歌曲</button>
+                        <button id="restartBtn" class="btn btn-secondary">🔄 重新生成</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 AI音乐生成系统 | 基于ACE-Step + Fish Speech + RVC</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
